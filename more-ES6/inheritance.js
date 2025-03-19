@@ -22,4 +22,4 @@ class Truck extends Vehicle{
     }
 }
 
-console.log(new Truck('Tata',292992,'200kg'))
+console.log(new Truck('Tata',292992,'200kg '))
