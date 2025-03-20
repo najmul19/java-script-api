@@ -1,6 +1,6 @@
 /**
- * primitive: pass by reference
- * non-primitive: pass by value
+ * non-primitive: pass by reference
+ * primitive: pass by value
  */
 
 let a=5;
