@@ -66,7 +66,26 @@ const cardDemo = {
   description:
     "'Midnight Serenade' by Noah Walker is a soulful journey into the depths of the night, capturing the mystique and allure of a moonlit evening. With 543K views, this song brings together tender melodies and evocative lyrics, making it a favorite among listeners seeking a contemplative yet uplifting experience. Immerse yourself in this musical masterpiece and feel the calm embrace of the night.",
 };
-
+const loadDetails= async(videoId)=>{
+  console.log(videoId)
+  const uri = `https://openapi.programming-hero.com/api/phero-tube/video/${videoId}`
+  const res = await fetch(uri);
+  const data = await res.json();
+  console.log(data)
+  displayDetails(data.video)
+}
+const displayDetails=(video)=>{
+  console.log(video)
+  const detailsContainer = document.getElementById('modal-content');
+  detailsContainer.innerHTML= `
+  <img src="${video.thumbnail}" />
+  <p>${video.description}</p>
+  `
+  // waiy-1
+  // document.getElementById('showModalData').click();
+  // way-2
+  document.getElementById('my_modal_5').showModal();
+}
 function getDate(date) {
     const day = parseInt(date/86400)
     let remainingDay = date%86400
@@ -132,7 +151,7 @@ const displayVideos = (videos) => {
             </div>
 
         
-        <p></p>
+        <p><button onClick="loadDetails('${video.video_id}')" class="btn btn-sm btn-error">details</button></p>
     </div>
     </div>
         `;
