@@ -12,53 +12,29 @@ const loadVideos = () => {
     .then((data) => displayVideos(data.pets))
     .catch((err) => console.log(err));
 };
-const detDemo={
-  "petId": 1,
-  "breed": "Golden Retriever",
-  "category": "Dog",
-  "date_of_birth": "2023-01-15",
-  "price": 1200,
-  "image": "https://i.ibb.co.com/p0w744T/pet-1.jpg",
-  "gender": "Male",
-  "pet_details": "This friendly male Golden Retriever is energetic and loyal, making him a perfect companion for families. Born on January 15, 2023, he enjoys playing outdoors and is especially great with children. Fully vaccinated, he's ready to join your family and bring endless joy. Priced at $1200, he offers love, loyalty, and a lively spirit for those seeking a playful yet gentle dog.",
-  "vaccinated_status": "Fully",
-  "pet_name": "Sunny"
-}
-const loadDetails= async(id)=>{
 
-   const uri = `https://openapi.programming-hero.com/api/peddy/pet/${id}`;
-   const res = await fetch(uri)
-   const data = await res.json();
+const loadDetails = async (id) => {
+  const uri = `https://openapi.programming-hero.com/api/peddy/pet/${id}`;
+  const res = await fetch(uri);
+  const data = await res.json();
   //  console.log("load details: ",id)
-  displayDetails(data)
-}
-const displayDetails=(video)=>{
-  console.log(video.petData.petId)
-  const detailsContainer = document.getElementById('modal-content');
-  detailsContainer.innerHTML=`
+  displayDetails(data);
+};
+const displayDetails = (video) => {
+  console.log(video.petData.petId);
+  const detailsContainer = document.getElementById("modal-content");
+  detailsContainer.innerHTML = `
     <img class=" pb-2 rounded-xl h-full w-full object-cover" src="${video.petData.image}"/>
     <hr/>
     <p class="text-gray-600 pt-2">${video.petData.pet_details}</P>
-  `
-  document.getElementById('showModalData').click();
-}
-const demo = {
-  petId: 1,
-  breed: "Golden Retriever",
-  category: "Dog",
-  date_of_birth: "2023-01-15",
-  price: 1200,
-  image: "https://i.ibb.co.com/p0w744T/pet-1.jpg",
-  gender: "Male",
-  pet_details:
-    "This friendly male Golden Retriever is energetic and loyal, making him a perfect companion for families. Born on January 15, 2023, he enjoys playing outdoors and is especially great with children. Fully vaccinated, he's ready to join your family and bring endless joy. Priced at $1200, he offers love, loyalty, and a lively spirit for those seeking a playful yet gentle dog.",
-  vaccinated_status: "Fully",
-  pet_name: "Sunny",
+  `;
+  document.getElementById("showModalData").click();
 };
+
 const displayVideos = (video) => {
   const videoContainer = document.getElementById("videos");
-  videoContainer.innerHTML=""
-  console.log("hey :   ",video)
+  videoContainer.innerHTML = "";
+  console.log("hey :   ", video);
   video.forEach((ele) => {
     console.log(ele.petId);
     const videCard = document.createElement("card");
@@ -97,13 +73,13 @@ const displayVideos = (video) => {
         </div>
         </div>
         `;
-        videoContainer.append(videCard);
+    videoContainer.append(videCard);
   });
 };
 const displayCategories = (categories) => {
   const categoryContainer = document.getElementById("categories");
   categoryContainer.innerHTML = "";
-  
+
   categories.forEach((element) => {
     // console.log(element);
     // const button = document.createElement("btn");
@@ -114,8 +90,8 @@ const displayCategories = (categories) => {
     const buttonContainer = document.createElement("div");
     const ok = element.category;
     const l = ok.toLowerCase();
-    
-    console.log("display cat: ",element)
+
+    console.log("display cat: ", element);
     buttonContainer.innerHTML = `
     <button  id="btn-${element.id}" onClick="loadCategoryVideos('${l}')" class="btn category-btn">
     ${element.category}
@@ -126,17 +102,16 @@ const displayCategories = (categories) => {
 };
 
 const loadCategoryVideos = (videoId) => {
-//   alert(videoId);
+  //   alert(videoId);
 
-console.log(videoId)
+  console.log(videoId);
   fetch(`https://openapi.programming-hero.com/api/peddy/category/${videoId}`)
     .then((res) => res.json())
-    .then((data) => displayVideos(data.data))
+    .then((data) => {
+      displayVideos(data.data);
+    })
     .catch((err) => console.log(err));
 };
-
-
-  
 
 loadCategories();
 loadVideos();
